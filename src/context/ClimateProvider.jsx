@@ -3,7 +3,6 @@ import { useState, createContext } from "react";
 const ClimateContext = createContext()
 const ClimateProvider = ({children}) => {
 
-    console.log(import.meta.env.VITE_API_KEY)
 
     const [search, setSearch] = useState({
         city: '',
