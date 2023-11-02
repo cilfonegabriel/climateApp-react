@@ -16,7 +16,7 @@ const Form = () => {
             setAlert('All fields are required')
             return
         }
-
+        setAlert('')
         checkClimate(search)
     }
 
