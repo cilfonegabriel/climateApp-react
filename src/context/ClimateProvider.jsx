@@ -5,6 +5,8 @@ const ClimateContext = createContext()
 const ClimateProvider = ({children}) => {
 
     const [result, setResult] = useState({})
+    const [loading, setLoading] = useState(false)
+    const [noResult, setNoResult] = useState(false)
 
     const [search, setSearch] = useState({
         city: '',
@@ -19,6 +21,8 @@ const ClimateProvider = ({children}) => {
     }
 
     const checkClimate = async datos => {
+        setLoading(true)
+        setNoResult(false)
         try {
             const { city, country } = datos
             const appId = import.meta.env.VITE_API_KEY
@@ -33,7 +37,9 @@ const ClimateProvider = ({children}) => {
             setResult(climate)
 
         } catch (err) {
-            console.error(err)
+            setNoResult('There not results')
+        } finally {
+            setLoading(false)
         }
     }
     
@@ -43,7 +49,9 @@ const ClimateProvider = ({children}) => {
                 search,
                 datosSearch,
                 checkClimate,
-                result
+                result,
+                loading,
+                noResult
             }}
         >
             {children}
